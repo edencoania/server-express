@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const PORT = process.env.PORT || 3030;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,4 +39,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`);
+});
 module.exports = app;
