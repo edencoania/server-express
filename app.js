@@ -56,8 +56,8 @@ app.get("/", (req, res) => {
 	const data = {
 		message: "Hello from server!",
 		links: [
-		  { label: "users", url: "http://localhost:8000/users" },
-		  { label: "teams", url: "http://localhost:8000/teams" },
+		  { label: "users", url: "https://express-hello-world-ok4t.onrender.com/users" },
+		  { label: "teams", url: "https://express-hello-world-ok4t.onrender.com/teams" },
 		  // add more links here
 		],
 	  };
