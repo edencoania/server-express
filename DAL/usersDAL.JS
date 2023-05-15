@@ -403,6 +403,7 @@ async function deleteUserById(id) {
 	  console.log("User not found");
 	  return;
 	}
+	
 	allUsers.user = filteredUsers;
 	await jsonfile.writeFile('./DATA/users.json', allUsers);
 	console.log(`User with ID ${id} has been deleted`);
