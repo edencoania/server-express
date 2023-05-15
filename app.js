@@ -8,12 +8,10 @@ const usersRouter = require('./routes/users');
 const eventsRouter = require('./routes/events');
 const jwt = require('jsonwebtoken');
 const url = require('url');
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 8000;
 
 
 const loginRouter = require('./routes/login');
-const { getAllUsers } = require("./DAL/usersDAL.js");
-const { getUserByID } = require("./DAL/usersDAL.js");
 
 const secrets = require('./key/secretKey');
 
@@ -64,3 +62,5 @@ else{
   app.listen(PORT, () => {
 	console.log(`server started on port ${PORT}`);
   });
+
+  module.exports = app;
