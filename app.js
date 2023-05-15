@@ -2,7 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const app = express();
-const usersDAL = require('./DAL/usersDAL');
+const path = require('path');
+const usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL'));
+
+//const usersDAL = require('./DAL/usersDAL');
 const teamsRouter = require('./routes/teams');
 const usersRouter = require('./routes/users');
 const eventsRouter = require('./routes/events');

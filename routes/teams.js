@@ -2,7 +2,11 @@ var express = require('express');
 var router = express.Router();
 const entryBL = require('../BL/usersBL');
 const http = require('http');
-const usersDAL = require('../DAL/usersDAL');
+
+const path = require('path');
+const usersDAL = require(path.join(__dirname, '..', 'DAL', 'usersDAL'));
+
+//const usersDAL = require('../DAL/usersDAL');
 const teamsDAL = require('../DAL/teamsDAL');
 const utils = require('../BL/utils');
 //const myteams = require('../BL/myteams')
