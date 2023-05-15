@@ -1,4 +1,4 @@
-const userDAL = require('../DAL/usersDAL.JS');
+const userDAL = require('../DAL/usersDAL.js');
 const teamDAL = require('../DAL/teamsDAL.JS');
 
 async function deleteUserandTeam(userId,teamId)

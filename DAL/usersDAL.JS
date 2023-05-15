@@ -1,4 +1,4 @@
-const jsonfile = require('../node_modules/jsonfile');
+const jsonfile = require('jsonfile');
 const path = require('path');
 
 function getAllUsers()
