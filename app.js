@@ -3,11 +3,11 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
-//const usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL'));
+const usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL'));
 //const usersDAL = require('./DAL/usersDAL');
-const teamsRouter = require('./routes/teams');
-const usersRouter = require('./routes/users');
-const eventsRouter = require('./routes/events');
+var teamsRouter = require('./routes/teams');
+var usersRouter = require('./routes/users');
+var eventsRouter = require('./routes/events');
 const jwt = require('jsonwebtoken');
 const url = require('url');
 const PORT = process.env.PORT || 8000;
@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 	  res.send(data);  });
 
 
-/*
+
 app.post("/signup/try", async (req, res) => {
 	let exist = await usersDAL.checkUserName(req.body.userName);
 	if(exist)
@@ -60,7 +60,7 @@ else{
     res.status(200).send({message: "signup successful",user:user,token: token });
 	}
   });
-*/
+
   app.listen(PORT, () => {
 	console.log(`server started on port ${PORT}`);
   });

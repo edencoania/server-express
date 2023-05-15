@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const entryBL = require('../BL/usersBL');
+var entryBL = require('../BL/usersBL');
 const http = require('http');
-const usersDAL = require('../DAL/usersDAL');
-const teamsDAL = require('../DAL/teamsDAL');
-const eventsDAL = require('../DAL/eventsDAL');
+var usersDAL = require('../DAL/usersDAL');
+var teamsDAL = require('../DAL/teamsDAL');
+var eventsDAL = require('../DAL/eventsDAL');
 const path = require('path');
 
-const utils = require('../BL/utils');
+var utils = require('../BL/utils');
 //const myteams = require('../BL/myteams')
 
 router.get("/", async (req, res) => {

@@ -4,11 +4,11 @@ const entryBL = require('../BL/usersBL');
 const http = require('http');
 
 const path = require('path');
-const usersDAL = require(path.join(__dirname, '..', 'DAL', 'usersDAL'));
+var usersDAL = require(path.join(__dirname, '..', 'DAL', 'usersDAL'));
 
 //const usersDAL = require('../DAL/usersDAL');
-const teamsDAL = require('../DAL/teamsDAL');
-const utils = require('../BL/utils');
+var teamsDAL = require('../DAL/teamsDAL');
+var utils = require('../BL/utils');
 //const myteams = require('../BL/myteams')
 
 /* GET users listing. */

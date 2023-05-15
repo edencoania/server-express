@@ -1,7 +1,7 @@
 const jsonfile = require('jsonfile');
 const path = require('path');
-const usersDAL = require(path.join(__dirname, 'usersDAL'));
-const eventsDAL = require(path.join(__dirname, 'eventsDAL'));
+var usersDAL = require(path.join(__dirname, 'usersDAL'));
+var eventsDAL = require(path.join(__dirname, 'eventsDAL'));
 //const usersDAL = require( './usersDAL');
 //const eventsDAL = require( './eventsDAL');
 
