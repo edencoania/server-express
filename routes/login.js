@@ -15,6 +15,12 @@ router.get('/', function(req, res, next) {
   res.send({"login":"aaaa"});
 });
 
+router.get('/log', function(req, res, next) {
+  const data = { message: 'eden is the king!' };
+  res.status(200).json(data);
+});
+
+
 
 router.post('/try',async function(req, res, next) {
   console.log(req.body.userName + " login.js -node router " +req.body.password);  

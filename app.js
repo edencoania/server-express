@@ -49,18 +49,6 @@ app.use(function(req, res, next) {
 	next(createError(404));
   });
 
-  // error handler
-app.use(function(err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-	// render the error page
-	res.status(err.status || 500);
-	res.render('error');
-  });
-
-
 app.get("/message", (req, res) => {
   //res.json({ message: "Hello from server!" });
   res.send({ message: "Hello from server!" });
@@ -94,6 +82,16 @@ else{
 		const token = jwt.sign(payload, secrets.secretKey, options);
     res.status(200).send({message: "signup successful",user:user,token: token });
 	}
+  });
+  // error handler
+  app.use(function(err, req, res, next) {
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error');
   });
 
 app.listen(PORT, () => {
