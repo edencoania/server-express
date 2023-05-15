@@ -44,10 +44,7 @@ app.use('/teams', teamsRouter);
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-	next(createError(404));
-  });
+
 
 app.get("/message", (req, res) => {
   //res.json({ message: "Hello from server!" });
@@ -72,7 +69,7 @@ app.post("/signup/try", async (req, res) => {
 	let exist = await usersDAL.checkUserName(req.body.userName);
 	if(exist)
 	{res.status(409).json({ message: "username already exist" });}
-else{
+	else{
 	let userId = await usersDAL.addUser(req.body);
 	//let users = await usersDAL.getAllUsers();
 	let user = await usersDAL.getUserByID(userId);
@@ -82,6 +79,11 @@ else{
 		const token = jwt.sign(payload, secrets.secretKey, options);
     res.status(200).send({message: "signup successful",user:user,token: token });
 	}
+  });
+
+  // catch 404 and forward to error handler
+app.use(function(req, res, next) {
+	next(createError(404));
   });
   // error handler
   app.use(function(err, req, res, next) {
