@@ -11,9 +11,9 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const url = require('url');
-
-var usersdal = require(path.join(__dirname, '.', 'dal', 'usersdal'));
-//const usersdal = require('./dal/usersdal');
+console.log("1")
+var usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL'));
+//const usersDAL = require('./DAL/usersDAL');
 var teamsRouter = require('./routes/teams');
 var usersRouter = require('./routes/users');
 var eventsRouter = require('./routes/events');
@@ -78,13 +78,14 @@ app.get("/", (req, res) => {
 
 
 app.post("/signup/try", async (req, res) => {
-	let exist = await usersdal.checkUserName(req.body.userName);
+	console.log("2")
+	let exist = await usersDAL.checkUserName(req.body.userName);
 	if(exist)
 	{res.status(409).json({ message: "username already exist" });}
 else{
-	let userId = await usersdal.addUser(req.body);
-	//let users = await usersdal.getAllUsers();
-	let user = await usersdal.getUserByID(userId);
+	let userId = await usersDAL.addUser(req.body);
+	//let users = await usersDAL.getAllUsers();
+	let user = await usersDAL.getUserByID(userId);
 		// Generate JWT token
 		const payload = { userId: user.userId, user:user, password:user.password };
 		const options = { expiresIn: '1h' };

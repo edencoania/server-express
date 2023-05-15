@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const entryBL = require('../BL/usersBL');
 const http = require('http');
-const usersdal = require('../dal/usersdal.js');
+console.log("7")
+const usersDAL = require('../DAL/usersDAL.js');
 const jwt = require('jsonwebtoken');
 const secrets = require('../key/secretKey');
 
@@ -21,7 +22,7 @@ router.post('/try',async function(req, res, next) {
   console.log(" login.js -node router - return ID " +id);
     if(id)
     {
-      let user = await usersdal.getUserByID(id);
+      let user = await usersDAL.getUserByID(id);
     
       const payload = { userId: id, user:user, password:user.password };
       const options = { expiresIn: '1h' };

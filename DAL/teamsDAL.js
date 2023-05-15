@@ -1,9 +1,10 @@
 const jsonfile = require('jsonfile');
 const path = require('path');
-var usersdal = require(path.join(__dirname, 'usersdal'));
-var eventsdal = require(path.join(__dirname, 'eventsdal'));
-//const usersdal = require( './usersdal');
-//const eventsdal = require( './eventsdal');
+console.log("5")
+var usersDAL = require(path.join(__dirname, 'usersDAL'));
+var eventsDAL = require(path.join(__dirname, 'eventsDAL'));
+//const usersDAL = require( './usersDAL');
+//const eventsDAL = require( './eventsDAL');
 
 /*
 		"id":id,
@@ -127,9 +128,9 @@ async function addUserToTeam(userName,teamId)
 			{
 				team.members.push(userName);
 				for (let eventId of team.events) {
-					let id = await usersdal.getUserIdByUserName(userName);
-					await usersdal.addEventToUser(id,eventId);
-					await eventsdal.addUserToEvent(userName,eventId);
+					let id = await usersDAL.getUserIdByUserName(userName);
+					await usersDAL.addEventToUser(id,eventId);
+					await eventsDAL.addUserToEvent(userName,eventId);
 				}
 			}
 		};
@@ -147,9 +148,9 @@ async function addEventToTeam(eventId,teamId)
 				element.events.push(eventId);
 				for (let userName of element.members)
 				{
-					let id = await usersdal.getUserIdByUserName(userName);
-					await usersdal.addEventToUser(id,eventId);
-					await eventsdal.addUserToEvent(userName,eventId);
+					let id = await usersDAL.getUserIdByUserName(userName);
+					await usersDAL.addEventToUser(id,eventId);
+					await eventsDAL.addUserToEvent(userName,eventId);
 				}	
 			}
 		});
