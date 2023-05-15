@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const url = require('url');
 console.log("1")
-var usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL'));
+var usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL.js'));
 //const usersDAL = require('./DAL/usersDAL');
 var teamsRouter = require('./routes/teams');
 var usersRouter = require('./routes/users');
