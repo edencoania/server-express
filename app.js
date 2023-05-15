@@ -4,7 +4,7 @@ var express = require("express");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var NODE_VERSION = "18.14.0"
 const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 
