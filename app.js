@@ -18,9 +18,10 @@ var usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL.js'));
 var teamsRouter = require('./routes/teams');
 var usersRouter = require('./routes/users');
 var eventsRouter = require('./routes/events');
-var loginRouter = require('./routes/login');
-var secrets = require('./key/secretKey');
 */
+var loginRouter = require('./routes/login');
+//var secrets = require('./key/secretKey');
+
 var app = express();
 
 // view engine setup
@@ -36,8 +37,9 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-/*
+
 app.use('/login', loginRouter);
+/*
 app.use('/teams', teamsRouter);
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
