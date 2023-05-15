@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const entryBL = require('../BL/usersBL');
 const http = require('http');
-const { useDeferredValue } = require('react');
 
 const path = require('path');
 console.log("10")
