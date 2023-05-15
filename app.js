@@ -1,49 +1,66 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require('body-parser');
+const app = express();
+const usersDAL = require('./DAL/usersDAL.JS');
+const teamsRouter = require('./routes/teams');
+const usersRouter = require('./routes/users');
+const eventsRouter = require('./routes/events');
+const jwt = require('jsonwebtoken');
+const url = require('url');
 const PORT = process.env.PORT || 3030;
-const cors = require('cors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
-var app = express();
+const loginRouter = require('./routes/login');
+const { getAllUsers } = require("./DAL/usersDAL.JS");
+const { getUserByID } = require("./DAL/usersDAL.JS");
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+const secrets = require('./key/secretKey');
 
 app.use(cors());
-
-app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
+app.use(bodyParser.json());
+app.use('/login', loginRouter);
+app.use('/teams', teamsRouter);
 app.use('/users', usersRouter);
+app.use('/events', eventsRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+
+app.get("/message", (req, res) => {
+  //res.json({ message: "Hello from server!" });
+  res.send({ message: "Hello from server!" });
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.get("/", (req, res) => {
+	//res.json({ message: "Hello from server!" });
+	const data = {
+		message: "Hello from server!",
+		links: [
+		  { label: "users", url: "http://localhost:8000/users" },
+		  { label: "teams", url: "http://localhost:8000/teams" },
+		  // add more links here
+		],
+	  };
+	  res.send(data);  });
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 
-app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`);
-});
-module.exports = app;
+app.post("/signup/try", async (req, res) => {
+	let exist = await usersDAL.checkUserName(req.body.userName);
+	if(exist)
+	{res.status(409).json({ message: "username already exist" });}
+else{
+	let userId = await usersDAL.addUser(req.body);
+	//let users = await usersDAL.getAllUsers();
+	let user = await usersDAL.getUserByID(userId);
+		// Generate JWT token
+		const payload = { userId: user.userId, user:user, password:user.password };
+		const options = { expiresIn: '1h' };
+		const token = jwt.sign(payload, secrets.secretKey, options);
+    res.status(200).send({message: "signup successful",user:user,token: token });
+	}
+  });
+
+  app.listen(PORT, () => {
+	console.log(`server started on port ${PORT}`);
+  });
