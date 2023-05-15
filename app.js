@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 	  res.send(data);  });
 
 
-
+/*
 app.post("/signup/try", async (req, res) => {
 	let exist = await usersDAL.checkUserName(req.body.userName);
 	if(exist)
@@ -60,7 +60,7 @@ else{
     res.status(200).send({message: "signup successful",user:user,token: token });
 	}
   });
-
+*/
   app.listen(PORT, () => {
 	console.log(`server started on port ${PORT}`);
   });
