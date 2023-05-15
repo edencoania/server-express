@@ -1,5 +1,5 @@
-console.log("3")
-const userDAL = require('../DAL/usersDAL.js');
+console.log("3");
+const userDAL = require('../DAL/usersDAL');
 
 async function Login(userName,password)
 {
