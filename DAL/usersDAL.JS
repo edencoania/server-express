@@ -93,7 +93,6 @@ async function getUserIdByUserName(username)
 	return found;
 }
 
-
 async function addUser(user)
 {
 	console.log("yay");
