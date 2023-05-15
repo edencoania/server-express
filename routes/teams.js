@@ -4,16 +4,16 @@ const entryBL = require('../BL/usersBL');
 const http = require('http');
 
 const path = require('path');
-var usersDAL = require(path.join(__dirname, '..', 'DAL', 'usersDAL'));
+var usersdal = require(path.join(__dirname, '..', 'dal', 'usersdal'));
 
-//const usersDAL = require('../DAL/usersDAL');
-var teamsDAL = require('../DAL/teamsDAL');
+//const usersdal = require('../dal/usersdal');
+var teamsdal = require('../dal/teamsdal');
 var utils = require('../BL/utils');
 //const myteams = require('../BL/myteams')
 
 /* GET users listing. */
 router.get('/',async function(req, res, next) {
-  let teams = await teamsDAL.getAllTeams();
+  let teams = await teamsdal.getAllTeams();
 	//console.log(users);
 	//res.json(user);
 	if(teams)
@@ -28,8 +28,8 @@ router.post("/createTeam", async (req, res) => {
 	let teamName = req.body.teamName;
 	let userName = req.body.userName;
 	console.log("recieve in node!")
-	let teamId = await teamsDAL.addTeam(teamName,userName);
-	await usersDAL.addTeamToUser(req.body.userId,teamId);
+	let teamId = await teamsdal.addTeam(teamName,userName);
+	await usersdal.addTeamToUser(req.body.userId,teamId);
 	res.status(200).send({message: "team added"});
 	//console.log(users);
 	//res.json(user);
@@ -44,8 +44,8 @@ router.post("/join", async (req, res) => {
 	//console.log(users);
 	//res.json(user);
 	//res.send(user);
-	let allTeams = await teamsDAL.getAllTeams();
-	let user = await usersDAL.getUserByID(userId);
+	let allTeams = await teamsdal.getAllTeams();
+	let user = await usersdal.getUserByID(userId);
 	let userName = user.userName; 
 	let pass = parseInt(teamPassword);
 	let teamFound = false;
@@ -54,8 +54,8 @@ router.post("/join", async (req, res) => {
 		let element = allTeams.team[i];
 		if(element.password==pass)
 		{
-			await teamsDAL.addUserToTeam(userName,element.id);
-			await usersDAL.addTeamToUser(userId,element.id);
+			await teamsdal.addUserToTeam(userName,element.id);
+			await usersdal.addTeamToUser(userId,element.id);
 			return res.status(200).send({ message: "team joined" });
 			}
 		
@@ -81,7 +81,7 @@ router.delete("/deleteUser", async (req, res) => {
 
 
 router.get("/:id", async (req, res) => {
-    let team = await teamsDAL.getTeamByTeamId(req.params.id);
+    let team = await teamsdal.getTeamByTeamId(req.params.id);
     //console.log(team);
     //res.json(user);
     if(team)

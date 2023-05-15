@@ -2,16 +2,16 @@ var express = require('express');
 var router = express.Router();
 var entryBL = require('../BL/usersBL');
 const http = require('http');
-var usersDAL = require('../DAL/usersDAL');
-var teamsDAL = require('../DAL/teamsDAL');
-var eventsDAL = require('../DAL/eventsDAL');
+var usersdal = require('../dal/usersdal');
+var teamsdal = require('../dal/teamsdal');
+var eventsdal = require('../dal/eventsdal');
 const path = require('path');
 
 var utils = require('../BL/utils');
 //const myteams = require('../BL/myteams')
 
 router.get("/", async (req, res) => {
-	let events = await eventsDAL.getAllEvents();
+	let events = await eventsdal.getAllEvents();
 	//console.log(events);
 	//res.json(users);
 
@@ -27,13 +27,13 @@ router.get("/", async (req, res) => {
 	let userId = req.body.userId;
 	let teamId =req.body.teamId;
 
-	let eventNum = await eventsDAL.createEvent(eventName,eventTime,eventPlace,eventInfo,userName);
-	await teamsDAL.addEventToTeam(eventNum,teamId);
-	await usersDAL.addEventToUser(userId,eventNum);
-	await usersDAL.approveEvent(userId,eventNum);
+	let eventNum = await eventsdal.createEvent(eventName,eventTime,eventPlace,eventInfo,userName);
+	await teamsdal.addEventToTeam(eventNum,teamId);
+	await usersdal.addEventToUser(userId,eventNum);
+	await usersdal.approveEvent(userId,eventNum);
 
 	//console.log(eventNum);
-	await usersDAL.approveEvent(userId,eventNum);
+	await usersdal.approveEvent(userId,eventNum);
 	
 	res.status(200).send({message: "event created"});
 	
@@ -48,13 +48,13 @@ router.get("/", async (req, res) => {
 	let userName = req.body.userName;
 	let userId = req.body.userId;
 	let eventId = req.body.eventId;
-	await usersDAL.approveEvent(userId,eventId);
+	await usersdal.approveEvent(userId,eventId);
 
-	await eventsDAL.approveEvent(eventId,userName);
+	await eventsdal.approveEvent(eventId,userName);
 
 	//לאשר הגעה - גם בצד EVENTS וגם אצל היוזר - להעביר ממוזמן, למאושר - 
-	//await teamsDAL.addEventToTeam(eventNum,teamId);
-	//await usersDAL.addEventToUser(userId,eventNum);
+	//await teamsdal.addEventToTeam(eventNum,teamId);
+	//await usersdal.addEventToUser(userId,eventNum);
 	//console.log(eventNum);
 	res.status(200).send({message: "event approved"});
 
@@ -124,13 +124,13 @@ router.get("/", async (req, res) => {
 		let userId = req.body.userId;
 		let eventId = req.body.eventId;
 		//TODO
-		await usersDAL.approveEvent(userId,eventId);
+		await usersdal.approveEvent(userId,eventId);
 	
-		await eventsDAL.approveEvent(eventId,userName);
+		await eventsdal.approveEvent(eventId,userName);
 	
 		//לאשר הגעה - גם בצד EVENTS וגם אצל היוזר - להעביר ממוזמן, למאושר - 
-		//await teamsDAL.addEventToTeam(eventNum,teamId);
-		//await usersDAL.addEventToUser(userId,eventNum);
+		//await teamsdal.addEventToTeam(eventNum,teamId);
+		//await usersdal.addEventToUser(userId,eventNum);
 		//console.log(eventNum);
 		res.status(200).send({message: "event approved"});
 	
@@ -139,7 +139,7 @@ router.get("/", async (req, res) => {
 
 
 router.get("/:id", async (req, res) => {
-	let event = await eventsDAL.getEventByID(req.params.id);
+	let event = await eventsdal.getEventByID(req.params.id);
 	//console.log(event);
 	//res.json(user);
 	if(event)

@@ -1,9 +1,9 @@
-const userDAL = require('../DAL/usersDAL.js');
+const userdal = require('../dal/usersdal.js');
 
 async function Login(userName,password)
 {
 	console.log(userName + " userBL.js " +password);
-	let allUsers = await userDAL.getAllUsers();
+	let allUsers = await userdal.getAllUsers();
 	let ok = false;
 	allUsers.user.forEach(element => {
 		let a = element.password.localeCompare(password);

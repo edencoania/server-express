@@ -5,10 +5,10 @@ const http = require('http');
 const { useDeferredValue } = require('react');
 
 const path = require('path');
-const usersDAL = require(path.join(__dirname, '..', 'DAL', 'usersDAL'));
+const usersdal = require(path.join(__dirname, '..', 'dal', 'usersdal'));
 
-//const usersDAL = require('../DAL/usersDAL.js');
-const teamsDAL = require('../DAL/teamsDAL');
+//const usersdal = require('../dal/usersdal.js');
+const teamsdal = require('../dal/teamsdal');
 const utils = require('../BL/utils');
 const secretKey = require('../key/secretKey');
 const jwt = require('jsonwebtoken');
@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken');
 //const myteams = require('../BL/myteams')
 
 router.get("/", async (req, res) => {
-	let users = await usersDAL.getAllUsers();
+	let users = await usersdal.getAllUsers();
 	//console.log(users);
 	//res.json(users);
 
@@ -29,7 +29,7 @@ router.post("/addFriend",async (req,res) =>{
 	let userName= req.body.userName;
 
 	//console.log(userName + " --- server recive post line 40 --- "+ friendUserName);
-	let addTry = await usersDAL.addFriendToUser(userName,friendUserName);
+	let addTry = await usersdal.addFriendToUser(userName,friendUserName);
 	if(addTry=="success")
 	{
 		res.status(200).send({ message: "friend added" });
@@ -51,7 +51,7 @@ router.post("/addFriend",async (req,res) =>{
 
 router.get("/:id", async (req, res) => {
 	try {
-	  let user = await usersDAL.getUserByID(req.params.id);
+	  let user = await usersdal.getUserByID(req.params.id);
   
 	  const authHeader = req.headers.authorization;
 	  const token = authHeader.split(' ')[1];
