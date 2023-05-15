@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const url = require('url');
 console.log("1")
+/*
 var usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL.js'));
 //const usersDAL = require('./DAL/usersDAL');
 var teamsRouter = require('./routes/teams');
@@ -19,7 +20,7 @@ var usersRouter = require('./routes/users');
 var eventsRouter = require('./routes/events');
 var loginRouter = require('./routes/login');
 var secrets = require('./key/secretKey');
-
+*/
 var app = express();
 
 // view engine setup
@@ -35,12 +36,12 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+/*
 app.use('/login', loginRouter);
 app.use('/teams', teamsRouter);
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
-
+*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
@@ -75,7 +76,7 @@ app.get("/", (req, res) => {
 	  };
 	  res.send(data);  });
 
-
+/*
 
 app.post("/signup/try", async (req, res) => {
 	console.log("2")
@@ -93,7 +94,7 @@ else{
     res.status(200).send({message: "signup successful",user:user,token: token });
 	}
   });
-
+*/
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
 });
