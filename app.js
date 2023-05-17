@@ -1,6 +1,9 @@
 var createError = require('http-errors');
 var express = require("express");
 
+const BASE_URL = 'https://express-hello-world-ok4t.onrender.com';
+//const BASE_URL = 'http://localhost:8000';
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -20,7 +23,7 @@ var usersRouter = require('./routes/users');
 var eventsRouter = require('./routes/events');
 
 var loginRouter = require('./routes/login');
-//var secrets = require('./key/secretKey');
+var secrets = require('./key/secretKey');
 
 var app = express();
 
@@ -56,8 +59,8 @@ app.get("/", (req, res) => {
 	const data = {
 		message: "Hello from server!",
 		links: [
-		  { label: "users", url: "https://express-hello-world-ok4t.onrender.com/users" },
-		  { label: "teams", url: "https://express-hello-world-ok4t.onrender.com/teams" },
+		  { label: "users", url: `${BASE_URL}/users` },
+		  { label: "teams", url: `${BASE_URL}/teams` },
 		  // add more links here
 		],
 	  };
@@ -81,10 +84,6 @@ app.post("/signup/try", async (req, res) => {
 	}
   });
 
-  // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-	next(createError(404));
-  });
   // error handler
   app.use(function(err, req, res, next) {
 	// set locals, only providing error in development
