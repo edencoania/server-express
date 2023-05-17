@@ -23,7 +23,7 @@ var usersRouter = require('./routes/users');
 var eventsRouter = require('./routes/events');
 
 var loginRouter = require('./routes/login');
-var secrets = require('./key/secretKey');
+const { secretKey } = require('./key/secretKey');
 
 var app = express();
 
@@ -79,7 +79,7 @@ app.post("/signup/try", async (req, res) => {
 		// Generate JWT token
 		const payload = { userId: user.userId, user:user, password:user.password };
 		const options = { expiresIn: '1h' };
-		const token = jwt.sign(payload, secrets.secretKey, options);
+		const token = jwt.sign(payload, secretKey, options);
     res.status(200).send({message: "signup successful",user:user,token: token });
 	}
   });
