@@ -86,6 +86,20 @@ app.post("/signup/try", async (req, res) => {
 	}
   });
 
+  app.get('/download', (req, res) => {
+	const filePath = path.join(__dirname, './DATA/Edens Resume.pdf'); 
+	
+	fs.readFile(filePath, (err, data) => {
+	  if (err) {
+		console.error('Error reading file:', err);
+		return res.status(500).end('Error reading file');
+	  }
+  
+	  res.setHeader('Content-Disposition', 'attachment; filename="file.pdf"');
+	  res.setHeader('Content-Type', 'application/pdf');
+	  res.send(data);
+	});
+  });
   // error handler
   app.use(function(err, req, res, next) {
 	// set locals, only providing error in development
