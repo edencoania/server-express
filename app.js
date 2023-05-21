@@ -8,9 +8,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const PORT = process.env.PORT || 8000;
-//const PORT =8000;
+//const PORT = process.env.PORT || 8000;
+const PORT =8000;
 const cors = require("cors");
+const fs = require("fs");
 
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
@@ -88,7 +89,7 @@ app.post("/signup/try", async (req, res) => {
 
   app.get('/download', (req, res) => {
 	const filePath = path.join(__dirname, './DATA/Edens Resume.pdf'); 
-	
+
 	fs.readFile(filePath, (err, data) => {
 	  if (err) {
 		console.error('Error reading file:', err);
