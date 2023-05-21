@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const PORT = process.env.PORT || 8000;
+//const PORT =8000;
 const cors = require("cors");
 
 const bodyParser = require('body-parser');
@@ -74,6 +75,7 @@ app.post("/signup/try", async (req, res) => {
 	{res.status(409).json({ message: "username already exist" });}
 	else{
 	let userId = await usersDAL.addUser(req.body);
+
 	//let users = await usersDAL.getAllUsers();
 	let user = await usersDAL.getUserByID(userId);
 		// Generate JWT token

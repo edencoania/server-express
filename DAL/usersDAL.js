@@ -1,5 +1,7 @@
 const jsonfile = require('jsonfile');
 const path = require('path');
+const bcrypt = require('bcrypt');
+
 
 function getAllUsers()
 {
@@ -102,12 +104,33 @@ async function addUser(user)
 	user.teams =  [];
     user.invitedEvents =  [];
     user.approvedEvents = [];
+	const hashedPassword = await bcrypt.hash(user.password, 10); // 10 is the salt rounds
+	user.password = hashedPassword;
+
 	let allUsers = await getAllUsers();
 	allUsers.user.push(user);
 	jsonfile.writeFile('./DATA/users.json',allUsers);
 	console.log("added user ID - " + user.id);
 	return user.id;
 }
+
+async function hashPasswordsForAllUsers() {
+	try {
+	  const allUsers = await getAllUsers();
+  
+	  for (let user of allUsers.user) {
+		const hashedPassword = await bcrypt.hash(user.password, 10); // 10 is the salt rounds
+		user.password = hashedPassword;
+	  }
+  
+	  await jsonfile.writeFile('./DATA/users.json', allUsers);
+	  console.log('Passwords hashed successfully for all users.');
+	} catch (error) {
+	  console.error('Error hashing passwords:', error);
+	}
+  }
+  
+  //hashPasswordsForAllUsers();
 
 async function testADD()
 {
