@@ -1,7 +1,21 @@
 var createError = require('http-errors');
 var express = require("express");
+const dotenv = require('dotenv');
 
-const BASE_URL = 'https://express-hello-world-ok4t.onrender.com';
+const env = process.env.NODE_ENV || 'development';
+
+const envFileMap = {
+    development: './local.env',
+    production: './deploy.env'
+};
+
+
+// Load the appropriate .env file based on the current environment
+const envFilePath = envFileMap[env] || './local.env';
+dotenv.config({ path: envFilePath });
+
+
+//const BASE_URL = 'https://express-hello-world-ok4t.onrender.com';
 //const BASE_URL = 'http://localhost:8000';
 
 var path = require('path');
@@ -61,8 +75,8 @@ app.get("/", (req, res) => {
 	const data = {
 		message: "Hello from server!",
 		links: [
-		  { label: "users", url: `${BASE_URL}/users` },
-		  { label: "teams", url: `${BASE_URL}/teams` },
+		  { label: "users", url: `${process.env.BASE_URL}/users` },
+		  { label: "teams", url: `${process.env.BASE_URL}/teams` },
 		  // add more links here
 		],
 	  };
