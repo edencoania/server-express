@@ -4,7 +4,6 @@ const entryBL = require('../BL/usersBL');
 const http = require('http');
 
 const path = require('path');
-console.log("8")
 var usersDAL = require(path.join(__dirname, '..', 'DAL', 'usersDAL'));
 
 //const usersDAL = require('../DAL/usersDAL');

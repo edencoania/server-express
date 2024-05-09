@@ -22,15 +22,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-//const PORT = process.env.PORT || 8000;
-const PORT =8000;
+const PORT = process.env.HOST_PORT || 8000;
+//const PORT =8000;
 const cors = require("cors");
 const fs = require("fs");
 
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const url = require('url');
-console.log("1")
 
 var usersDAL = require(path.join(__dirname, '.', 'DAL', 'usersDAL.js'));
 //const usersDAL = require('./DAL/usersDAL');
@@ -84,7 +83,6 @@ app.get("/", (req, res) => {
 
 
 app.post("/signup/try", async (req, res) => {
-	console.log("2")
 	let exist = await usersDAL.checkUserName(req.body.userName);
 	if(exist)
 	{res.status(409).json({ message: "username already exist" });}

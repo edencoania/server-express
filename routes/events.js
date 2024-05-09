@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var entryBL = require('../BL/usersBL');
 const http = require('http');
-console.log("6")
 var usersDAL = require('../DAL/usersDAL');
 var teamsDAL = require('../DAL/teamsDAL');
 var eventsDAL = require('../DAL/eventsDAL');

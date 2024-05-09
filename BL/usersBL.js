@@ -1,4 +1,3 @@
-console.log("3");
 const userDAL = require('../DAL/usersDAL');
 const bcrypt = require('bcrypt');
 

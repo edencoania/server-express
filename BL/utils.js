@@ -1,4 +1,3 @@
-console.log("4")
 const userDAL = require('../DAL/usersDAL.js');
 const teamDAL = require('../DAL/teamsDAL.js');
 

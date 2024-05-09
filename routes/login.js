@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const entryBL = require('../BL/usersBL');
 const http = require('http');
-console.log("7");
 const usersDAL = require('../DAL/usersDAL.js');
 const jwt = require('jsonwebtoken');
 const secrets = require('../key/secretKey');
