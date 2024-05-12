@@ -12,4 +12,3 @@ COPY . /app
 ENV NODE_ENV $ENV_FILE
 
 CMD npm start
-
