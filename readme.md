@@ -6,3 +6,4 @@ The project include local.env and deploy.env,
 
 inside the main page there is re-direction and the BASE_URL is changing via environments variables.
 
+While DevOps study - I improve the project by continarize it and using docker in order to deploy it.

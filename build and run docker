@@ -1,0 +1,5 @@
+# in order to run locally the back-end as container - localhost:8000
+
+docker build -t nodejs .
+
+docker run -p 8000:8000 nodejs

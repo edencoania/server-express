@@ -17,7 +17,7 @@ dotenv.config({ path: envFilePath });
 
 //const BASE_URL = 'https://express-hello-world-ok4t.onrender.com';
 //const BASE_URL = 'http://localhost:8000';
-
+const BASE_URL = process.env.BASE_URL
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -75,7 +75,7 @@ app.get("/", (req, res) => {
 		message: "Hello from server!",
 		links: [
 		  { label: "users", url: `${process.env.BASE_URL}/users` },
-		  { label: "teams", url: `${process.env.BASE_URL}/teams` },
+		  { label: "teams", url: `${BASE_URL}/teams` },
 		  // add more links here
 		],
 	  };
