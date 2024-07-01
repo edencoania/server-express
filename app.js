@@ -8,7 +8,6 @@ const envFileMap = {
     development: './local.env',
     production: './deploy.env'
 };
-const USER = require("../models/user");
 
 
 // Load the appropriate .env file based on the current environment
