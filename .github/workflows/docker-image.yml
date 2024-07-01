@@ -22,12 +22,13 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
         context: .
         push: true
-        tags: edencoania/release:nodeJs-bakal-server-${{ github.run_number }}
+        tags: ${{ secrets.DOCKER_REPO }}:nodeJs-bakal-server-${{ github.run_number }}
 
     - name: Log out from Docker Hub
       run: docker logout
